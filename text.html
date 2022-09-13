@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">    <!-- connecting css -->
+    
+    <title>WEB-LAB-1</title>
+</head>
+<body style="color: white;">
+    <script type="text/javascript">
+        $(function () {
+          $(".menu2 a").append("<em></em>");
+          $(".menu2 a").hover(function () {
+            $(this).find("em").stop(true, true).animate({opacity: "show", top: "-75"}, "slow");
+            var hoverText = $(this).attr("title");
+            $(this).find("em").text(hoverText);
+          }, function () {
+            $(this).find("em").stop(true, true).animate({opacity: "hide", top: "-85"}, "fast");
+          });
+    
+    
+        });
+      </script>
+    <ul class="menu2">
+        <li>
+          <a href="https://anton.shevchuk.name" title="Go to homepage">Home</a>
+        </li>
+    <li>
+</body>
+</html>
