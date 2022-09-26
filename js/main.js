@@ -1,23 +1,32 @@
+import {drawGraph, drawPoint} from "./graph.js";
+
+const elsTyper = document.querySelectorAll("span");
+const rand = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
 var form = document.querySelector('.validateForm');
 var submitBut = form.querySelector('.submitButton');
 var xVal = form.querySelectorAll('.x');
 var yVal = form.querySelector('.y');
 var rVal = form.querySelectorAll('.r');
+function getNum(checkboxOrRadio){
+    for(var i = 0; i < checkboxOrRadio.length; i++){
+        var num;
+        if (checkboxOrRadio[i].checked) {
+            return checkboxOrRadio[i].value;
+        }
+    }
+}
 function validateCheckbox(checkboxes){
     var counter = 0;
-    for(i = 0; i < checkboxes.length; i++){
+    for(var i = 0; i < checkboxes.length; i++){
         if (checkboxes[i].checked) counter++; 
     }
     if(counter != 1){
+        var parent  = checkboxes[0].parentElement.parentElement;
         if(counter == 0){
-            var error = generateError('field is blank');
-            $(checkboxes[0].parentElement).append("<em></em>");
-            $(checkboxes[0].parentElement).find("em").animate({opacity: "show", top: "-75"}, "slow");
-            var hoverText = $(checkboxes[0].parentElement).attr("title");
-            $(checkboxes[0].parentElement).find("em").text(hoverText);
+            generateError(parent, "field is blank")
         }
-        else var error = generateError('оnly one value is allowed');
-        checkboxes[0].parentElement.insertBefore(error,checkboxes[0]);
+        else generateError(parent,'оnly one value is allowed');
         return false;
     }
     else return true;
@@ -26,10 +35,10 @@ function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function removeTips() {
-    var tips = form.querySelectorAll('.tip')      
-    for (var i = 0; i < tips.length; i++) {
-        tips[i].remove()
+function removeErrors() {
+    var errors = form.querySelectorAll('em')      
+    for (var i = 0; i < errors.length; i++) {
+        errors[i].remove()
     }
   }
 
@@ -40,40 +49,34 @@ function validateInput(num, min, max){
             return true;
         }
         else{
-            var error = generateError('wrong number format');
-            num.parentElement.insertBefore(error,num);
-            return false;
+            generateError(num,'wrong number format');
         }
     }
     else{
-        var error = generateError('field is blank');
-        num.parentElement.insertBefore(error,num);
-        return false;
+        generateError(num,'field is blank');
     }
 }
-function generateError(text){
-    var tip = document.createElement('div');
-    tip.className = 'tip';
-    tip.style.color = 'red';
-    tip.innerHTML = text;
-    return tip;
+function generateError(parent,text){
+    $("<em></em>").insertBefore($(parent));
+    $(parent.parentElement).find("em").animate({opacity: "show", top: $(parent).offset().top-80}, "slow");
+    $(parent.parentElement).find("em").text(text);
 }
 function validateRadio(radios){
-    for(i = 0 ; i < radios.length; i++){
+    var parent = radios[0].parentElement;
+    for(var i = 0 ; i < radios.length; i++){
         if(radios[i].checked) return true;
     }
-    var error = generateError('field is blank');
-    radios[0].parentElement.insertBefore(error, radios[0]);
+    generateError(parent,'field is blank');
     return false;
 
 }
 function validateFields(){
-    return validateCheckbox(xVal) && validateInput(yVal,-5,5) && validateRadio(rVal);
+    return validateCheckbox(xVal) & validateInput(yVal,-5,5) & validateRadio(rVal);
 }
 $(document).ready(function(){
     $.ajax({
         url: 'php/load.php',
-        method: "POST",
+        method: "GET",
         dataType: "html",
         success: function(data){
           console.log(data);
@@ -83,22 +86,32 @@ $(document).ready(function(){
           console.log(error);	
         },
     })
-    $(".container a").append("<em></em>");
-    $(".container a").hover(function() {
-        $(this).find("em").animate({opacity: "show", top: "75"}, "slow");
-        var hoverText = $(this).attr("title");
-        $(this).find("em").text(hoverText);
-    }, function() {
-        $(this).find("em").animate({opacity: "hide", top: "-85"}, "fast");
-    });
+    drawGraph();
+    const typer = (el) => {
+        const text = el.dataset.typer;
+        const tot = text.length;
+        let ch = 0;
+      
+        (function typeIt() {
+          if (ch > tot){
+            el.removeAttribute('data-typer');
+            return;
+          }
+          el.innerHTML = text.substring(0, ch++);
+          setTimeout(typeIt, rand(10, 20));
+        }());
+    };
+    elsTyper.forEach(typer);
 })
 
 $("#form").on('submit', function(event) {
     event.preventDefault();
-    console.log("xVal: ", xVal);
+    var x = getNum(xVal);
+    var r = getNum(rVal);
+    console.log("xVal: ", x);
     console.log("yVal: ", yVal.value);
-    console.log("rVal: ", rVal);
-    removeTips();
+    console.log("rVal: ", r);
+    removeErrors();
     if (!validateFields()){
         console.log("post canceled")
         return
@@ -106,7 +119,7 @@ $("#form").on('submit', function(event) {
     console.log("data sending...");
     $.ajax({
         url: 'php/server.php',
-        method: "POST",
+        method: "GET",
         data: $(this).serialize() + "&timezone=" + new Date().getTimezoneOffset(),
         dataType: "html",
   
@@ -114,6 +127,14 @@ $("#form").on('submit', function(event) {
           console.log(data);
           $(".submitButton").attr("disabled", false);	
           $("#answersTable > tbody").html(data);
+          var canvas = document.getElementById("graph");
+          var ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          var xt = x*100/r+150;
+          var yt =  (-yVal.value)*100/r+150;
+          drawPoint(xt,yt, r);
+          console.log(xt);
+          console.log(yt);
         },
         error: function(error){
           console.log(error);
@@ -125,7 +146,7 @@ $("#form").on('submit', function(event) {
 $(".resetButton").on('click', function(){
     $.ajax({
         url: 'php/reset.php',
-        method: "POST",
+        method: "GET",
         dataType: "html",
         success: function(data){
           console.log(data);

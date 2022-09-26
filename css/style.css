@@ -20,6 +20,7 @@ table.content{
 }
 
 #header{
+    font-family: sans-serif;
     background: #03e9f4;
     color: white;
     background-position: top center;
@@ -171,4 +172,49 @@ table.buttonTable{
     font-style: normal;
     z-index: 2;
     display: none;
+}
+em{
+    font-weight: normal;
+    color:red;
+    font-weight: bold;
+    background: url(/img/hover.png) no-repeat;
+    width: 180px;
+    height: 45px;
+    position: absolute;
+    text-align: center;
+    padding: 20px 12px 10px;
+    font-style: normal;
+    z-index: 2;
+    display: none;
+    align-items: top;
+}
+.buttonTable #yField input{
+    width: 100%;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 5%;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+.buttonTable #yField label {
+    position: relative;
+    top: -50px;
+    left: -40%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+  }
+.buttonTable #yField input::placeholder{
+    color: transparent;
+}
+.buttonTable #yField input:focus ~ label,
+.buttonTable #yField input:not(:placeholder-shown) ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
 }

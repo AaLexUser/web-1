@@ -20,11 +20,11 @@ session_start();
 if (!isset($_SESSION['data']))
     $_SESSION['data'] = array();
 
-if(!empty($_POST)){
-    $x = @$_POST["x_coordinate"];
-    $y = @$_POST["y_coordinate"];
-    $r = @$_POST["r_coordinate"];  
-    $timezone= @$_POST["timezone"];
+if(!empty($_GET)){
+    $x = @$_GET["x_coordinate"];
+    $y = @$_GET["y_coordinate"];
+    $r = @$_GET["r_coordinate"];  
+    $timezone= @$_GET["timezone"];
     if(validateNumber($x,-4,4) && validateNumber($y, -5, 5) && validateNumber($r,1,3) && validateTimezone($timezone)){
         checkSecondQuadrant($x, $y, $r) || checkThirdQuadrant($x, $y, $r) || checkFourthQuadrant($x, $y, $r) ? $ishit = "Hit" : $ishit = "Miss";
         $currentTime = date("H:i:s", time()-$timezone*60);

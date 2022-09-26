@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">    <!-- connecting css -->
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>WEB-LAB-1</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
             <tr>
                 <td width ="45%" style="vertical-align: top;">
                     <!--Page Head-->
-                    <div id = "header" class="container"><a title="check it">Lapin Alexey Alexandrovich</a><br>Group Р32101<br>Variant №1606</div>
+                    <div id = "header" class="container"><span data-typer = "Lapin Alexey Alexandrovich<br>Group Р32101<br>Variant №1606"></div>
                     <div id = "buttons "class="container" >
                         <form id="form" action="php/server.php" class="validateForm" method="post"> 
                             <table class="buttonTable">
@@ -85,33 +85,52 @@
                             <table class="buttonTable">
                                 <tr>
                                     <td style="text-align: left;">Enter Y:</td>
-                                    <td><input autocomplete="off" maxlength="10" type="text" name="y_coordinate" class="y field" size="35" placeholder="From -5 to 5."></td>
+                                    <td>
+                                        <div id = "yField">
+                                            <input type="text" name="y_coordinate" class="y field" placeholder="From -5 to 5.">
+                                            <label>From -5 to 5.</label>
+                                        </div>
+                                    </td>
                                 </tr>
                             </table>
                             <table class="buttonTable" >
                                 <tr>
                                     <td style="text-align: left;">Enter R:</td>
                                     <td>
-                                        <div class="inputGroup">
-                                            <input id="radio1" type="radio" name="r_coordinate" class="r" value="1"/>
-                                            <label for="radio1">1</label>
-                                          </div>
-                                          <div class="inputGroup">
-                                            <input id="radio2" type="radio" name="r_coordinate" class="r" value="1.5"/>
-                                            <label for="radio2">1.5</label>
-                                        </div>
-                                        <div class="inputGroup">
-                                            <input id="radio3" type="radio" name="r_coordinate" class="r" value="2"/>
-                                            <label for="radio3">2</label>
-                                          </div>
-                                          <div class="inputGroup">
-                                            <input id="radio4" type="radio" name="r_coordinate" class="r" value="2.5"/>
-                                            <label for="radio4">2.5</label>
-                                        </div>
-                                        <div class="inputGroup">
-                                            <input id="radio5" type="radio" name="r_coordinate" class="r" value="3"/>
-                                            <label for="radio5">3</label>
-                                        </div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="inputGroup">
+                                                        <input id="radio1" type="radio" name="r_coordinate" class="r" value="1"/>
+                                                        <label for="radio1">1</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="inputGroup">
+                                                        <input id="radio2" type="radio" name="r_coordinate" class="r" value="1.5"/>
+                                                        <label for="radio2">1.5</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="inputGroup">
+                                                        <input id="radio3" type="radio" name="r_coordinate" class="r" value="2"/>
+                                                        <label for="radio3">2</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="inputGroup">
+                                                        <input id="radio4" type="radio" name="r_coordinate" class="r" value="2.5"/>
+                                                        <label for="radio4">2.5</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="inputGroup">
+                                                        <input id="radio5" type="radio" name="r_coordinate" class="r" value="3"/>
+                                                        <label for="radio5">3</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>
@@ -140,7 +159,7 @@
                 </td>
                 <td style="vertical-align: top;">
                     <div class="container">
-                        <div style="text-align: left;">
+                        <div style="text-align: left;"><span data-typer = '
                             <b>Разработанная HTML-страница должна удовлетворять следующим требованиям:</b><br>
                             <li>Для расположения текстовых и графических элементов необходимо использовать табличную верстку.</li>
                             <li>Данные формы должны передаваться на обработку посредством GET-запроса.</li>
@@ -149,76 +168,19 @@
                             <li>HTML-страница должна иметь "шапку", содержащую ФИО студента, номер группы и новер варианта. При оформлении шапки необходимо явным образом задать шрифт (sans-serif), его цвет и размер в каскадной таблице стилей.</li>
                             <li>Отступы элементов ввода должны задаваться в процентах.</li>
                             <li>Страница должна содержать сценарий на языке JavaScript, осуществляющий валидацию значений, вводимых пользователем в поля формы. Любые некорректные значения (например, буквы в координатах точки или отрицательный радиус) должны блокироваться.</li>
+                            '>
                         </div>
                         <!-- <img class="areas" src="img/areas.png"> -->
                         <canvas id="graph" width="300" height="300">
                             Your browser does not support the canvas element.
                         </canvas>
-                        <script>
-                            var canvas = document.getElementById("graph");
-                            var ctx = canvas.getContext("2d");
-                            ctx.beginPath();
-                            ctx.moveTo(150,50);
-                            ctx.lineTo(50,150);
-                            ctx.lineTo(150,150);
-                            ctx.lineTo(150,50);
-                            ctx.fillStyle = '#02a5ae';
-                            ctx.fill();
-                            ctx.beginPath();
-                            ctx.arc(150, 150, 100, Math.PI, 0 , true);
-                            ctx.fill();
-                            ctx.fillRect(50,150,100,100);
-                            
-                            ctx.beginPath();
-                            ctx.strokeStyle = 'white';
-                            ctx.moveTo(150, 300);
-                            ctx.lineTo(150, 0)
-                            ctx.lineTo(145,10);
-                            ctx.moveTo(150,0);
-                            ctx.lineTo(155,10);
-                            ctx.moveTo(145,50);
-                            ctx.lineTo(155,50);
-                            ctx.moveTo(145,100);
-                            ctx.lineTo(155,100);
-                            ctx.moveTo(145,200);
-                            ctx.lineTo(155,200);
-                            ctx.moveTo(145,250);
-                            ctx.lineTo(155,250);
-                            ctx.moveTo(0,150);
-                            ctx.lineTo(300,150);
-                            ctx.moveTo(300,150);
-                            ctx.lineTo(290,145);
-                            ctx.moveTo(300,150);
-                            ctx.lineTo(290,155);
-                            ctx.moveTo(250,145);
-                            ctx.lineTo(250,155);
-                            ctx.moveTo(200,145);
-                            ctx.lineTo(200,155);
-                            ctx.moveTo(100,145);
-                            ctx.lineTo(100,155);
-                            ctx.moveTo(50,145);
-                            ctx.lineTo(50,155);
-                            ctx.stroke();
-
-                            ctx.fillStyle = 'white';
-                            ctx.font = '20px serif';
-                            ctx.fillText('R/2', 190, 140);
-                            ctx.fillText('R', 245, 140);
-                            ctx.fillText('-R/2', 80, 140);
-                            ctx.fillText('-R', 35, 140);
-
-                            ctx.fillText('R/2', 160, 205);
-                            ctx.fillText('R', 160, 255);
-                            ctx.fillText('-R/2', 160, 105);
-                            ctx.fillText('-R', 160, 55);
-                        </script> 
                     </div>
                     <div id="footer" class="container"><label>ITMO University<br>Saint Petersburg<br>2022</label></div>
                 </td>
             </tr>
         </tbody>
     </table>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js" type = "module"></script>
+<script src="js/graph.js" type = "module"></script>
 </body>
 </html>
