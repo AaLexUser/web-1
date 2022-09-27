@@ -21,62 +21,62 @@
                     <!--Page Head-->
                     <div id = "header" class="container"><span data-typer = "Lapin Alexey Alexandrovich<br>Group Р32101<br>Variant №1606"></div>
                     <div id = "buttons "class="container" >
-                        <form id="form" action="php/server.php" class="validateForm" method="post"> 
+                        <form id="form" action="php/server.php" class="validateForm" method="get"> 
                             <table class="buttonTable">
                                 <tr>
                                     <td style="text-align:left">Enter Х:</td>
                                     <td></td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option1" type="checkbox" name="x_coordinate" class="x" value="-4"/>
+                                            <input id="option1" type="checkbox" name="x_coordinate[]" class="x" value="-4"/>
                                             <label for="option1">-4</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option2" type="checkbox" name="x_coordinate" class="x" value="-3"/>
+                                            <input id="option2" type="checkbox" name="x_coordinate[]" class="x" value="-3"/>
                                             <label for="option2">-3</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option3" type="checkbox" name="x_coordinate" class="x" value="-2"/>
+                                            <input id="option3" type="checkbox" name="x_coordinate[]" class="x" value="-2"/>
                                             <label for="option3">-2</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option4" type="checkbox" name="x_coordinate" class="x" value="-1"/>
+                                            <input id="option4" type="checkbox" name="x_coordinate[]" class="x" value="-1"/>
                                             <label for="option4">-1</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option5" type="checkbox" name="x_coordinate" class="x" value="0"/>
+                                            <input id="option5" type="checkbox" name="x_coordinate[]" class="x" value="0"/>
                                             <label for="option5">0</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option6" type="checkbox" name="x_coordinate" class="x" value="1"/>
+                                            <input id="option6" type="checkbox" name="x_coordinate[]" class="x" value="1"/>
                                             <label for="option6">1</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option7" type="checkbox" name="x_coordinate" class="x" value="2"/>
+                                            <input id="option7" type="checkbox" name="x_coordinate[]" class="x" value="2"/>
                                             <label for="option7">2</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option8" type="checkbox" name="x_coordinate" class="x" value="3"/>
+                                            <input id="option8" type="checkbox" name="x_coordinate[]" class="x" value="3"/>
                                             <label for="option8">3</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="inputGroup">
-                                            <input id="option9" type="checkbox" name="x_coordinate" class="x" value="4"/>
+                                            <input id="option9" type="checkbox" name="x_coordinate[]" class="x" value="4"/>
                                             <label for="option9">4</label>
                                         </div>
                                     </td>
@@ -148,7 +148,7 @@
                                     <th >R</th>
                                     <th >Is Hit</th>
                                     <th >Current time</th>
-                                    <th >Script running time, sec</th>
+                                    <th >Script running time, msec</th>
                                 </thead>
                                 <tbody id = "placeForAnswer">
                                     

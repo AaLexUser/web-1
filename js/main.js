@@ -21,15 +21,7 @@ function validateCheckbox(checkboxes){
     for(var i = 0; i < checkboxes.length; i++){
         if (checkboxes[i].checked) counter++; 
     }
-    if(counter != 1){
-        var parent  = checkboxes[0].parentElement.parentElement;
-        if(counter == 0){
-            generateError(parent, "field is blank")
-        }
-        else generateError(parent,'оnly one value is allowed');
-        return false;
-    }
-    else return true;
+    return true;
 }
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -71,7 +63,7 @@ function validateRadio(radios){
 
 }
 function validateFields(){
-    return validateCheckbox(xVal) & validateInput(yVal,-5,5) & validateRadio(rVal);
+    return  validateRadio(xVal) & validateInput(yVal,-5,5) & validateRadio(rVal);
 }
 $(document).ready(function(){
     $.ajax({
@@ -108,12 +100,12 @@ $("#form").on('submit', function(event) {
     event.preventDefault();
     var x = getNum(xVal);
     var r = getNum(rVal);
-    console.log("xVal: ", x);
+    console.log("xVal: ", xVal);
     console.log("yVal: ", yVal.value);
     console.log("rVal: ", r);
     removeErrors();
     if (!validateFields()){
-        console.log("post canceled")
+        console.log("get canceled")
         return
     }
     console.log("data sending...");

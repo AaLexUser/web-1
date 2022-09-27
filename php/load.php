@@ -9,7 +9,7 @@ if(isset($_SESSION['data'])){
         echo "<td>" . $elem['r'] . "</td>";
         echo "<td>" . $elem['ishit']  . "</td>";
         echo "<td>" . $elem['currentTime']  . "</td>";
-        echo "<td>" . $elem['executionTime'] . "</td>";
+        echo "<td>" . $elem['executionTime']*1000 . "</td>";
         echo "</tr>";
     }
 }
